@@ -2,7 +2,7 @@
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
 line1 = "gryyby" #input("First Line:")
-line2 = "prgpbb" #input("Second Line:")
+line2 = "pryybb" #input("Second Line:")
 line3 = "bbggpb" #input("Third Line:")
 line4 = "gyybbr" #input("Fourth line:")
 line5 = "pypbyb" #input("Fifth Line:")
@@ -58,7 +58,7 @@ def findsurrounding(row, index, color):
         selfpotentialcombos.append([row, index - 1])
     return selfpotentialcombos
 
-potentialcombos = []
+squares = []
 
 dotnum = 0
 dotrow = 0
@@ -68,16 +68,28 @@ for row in grid:
         dotnum = (dotnum % 6) + 1
         surrounding = findsurrounding(dotrow, dotnum, dot)
         stringofdots = []
+        shape = "single"
         for combodot in surrounding:
+            shape = "double"
             stringofdots = [[dotrow, dotnum], combodot]
             nextsurrounding = findsurrounding(combodot[0], combodot[1], dot)
             nextsurrounding.remove([dotrow, dotnum])
             for anotherdot in nextsurrounding:
+                shape = "triple"
                 stringofdots = [[dotrow, dotnum], combodot, anotherdot]
                 nnextsurrounding = findsurrounding(anotherdot[0], anotherdot[1], dot)
-                nnextsurrounding.remove([dotrow, dotnum])
+                nnextsurrounding.remove(combodot)
+                for aanotherdot in nnextsurrounding:
+                    shape = "quad"
+                    nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
+                    nnnextsurrounding.remove(anotherdot)
+                    if nnnextsurrounding.count([dotrow, dotnum]) == 1:
+                        shape = "square"
+                        stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+        if shape == "square":
+            squares.append([stringofdots, dot])
+            print(stringofdots, dot)
 
-#print(potentialcombos)
 
 
 
