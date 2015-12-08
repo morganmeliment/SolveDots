@@ -87,8 +87,18 @@ for row in grid:
                         shape = "square"
                         stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
         if shape == "square":
-            squares.append([stringofdots, dot])
-            print(stringofdots, dot)
+            canapp = True
+            for sd in squares:
+                yount = 0
+                for sx in sd:
+                    for sa in stringofdots:
+                        if sx == sa:
+                            yount += 1
+                if yount == 4:
+                    canapp = False
+            if canapp == True:
+                squares.append(stringofdots)
+print(squares)
 
 
 
