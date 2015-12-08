@@ -5,13 +5,17 @@ line4 = "gyybbr" #input("Fourth line:")
 line5 = "pypbyb" #input("Fifth Line:")
 line6 = "byppbb" #input("Sixth Line:")
 
-grid = {"one" => line1, "two" => line2, "three" => line3, "four" => line4, "five" => line5, "six" => line6}
+grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
+
+def findsurrounding(row, index):
+    return [[row - 1, index - 1], [row - 1, index], [row - 1, index + 1], [row, index - 1], [row, index], [row, index + 1], [row + 1, index - 1], [row + 1, index], [row + 1, index + 1]]
 
 dotnum = 0
-dotrow = 1
-for dot in grid:
-    if dotnum == 5:
-        dotrow += 1
-    dotnum = (dotnum + 1) % 6
-    print(dotrow, dotnum)
+dotrow = 0
+for row in grid:
+    dotrow += 1
+    stringrow = list(grid[row])
+    for dot in stringrow:
+        dotnum = (dotnum % 6) + 1
+        print(dotrow, dotnum)
     
