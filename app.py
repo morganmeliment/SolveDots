@@ -1,12 +1,12 @@
 """
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
-line1 = "gryyby" #input("First Line:")
-line2 = "pryybb" #input("Second Line:")
-line3 = "bbggpb" #input("Third Line:")
-line4 = "gyybbr" #input("Fourth line:")
-line5 = "pypbyb" #input("Fifth Line:")
-line6 = "byppbb" #input("Sixth Line:")
+line1 = "gyrrry" #input("First Line:")
+line2 = "rggyyg" #input("Second Line:")
+line3 = "rypyyg" #input("Third Line:")
+line4 = "rrpyyp" #input("Fourth line:")
+line5 = "ygryyy" #input("Fifth Line:")
+line6 = "ppypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
@@ -69,23 +69,26 @@ for row in grid:
         surrounding = findsurrounding(dotrow, dotnum, dot)
         stringofdots = []
         shape = "single"
-        for combodot in surrounding:
+        if len(surrounding) > 0:
             shape = "double"
+        for combodot in surrounding:
             stringofdots = [[dotrow, dotnum], combodot]
             nextsurrounding = findsurrounding(combodot[0], combodot[1], dot)
             nextsurrounding.remove([dotrow, dotnum])
+            if len(nextsurrounding) > 0:
+                    shape = "triple"
             for anotherdot in nextsurrounding:
-                shape = "triple"
                 stringofdots = [[dotrow, dotnum], combodot, anotherdot]
                 nnextsurrounding = findsurrounding(anotherdot[0], anotherdot[1], dot)
                 nnextsurrounding.remove(combodot)
-                for aanotherdot in nnextsurrounding:
+                if len(nnextsurrounding) > 0:
                     shape = "quad"
-                    nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
-                    nnnextsurrounding.remove(anotherdot)
-                    if nnnextsurrounding.count([dotrow, dotnum]) == 1:
-                        shape = "square"
-                        stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+                    for aanotherdot in nnextsurrounding:
+                        nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
+                        nnnextsurrounding.remove(anotherdot)
+                        if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
+                            shape = "square"
+                            stringofdots = [[dotrow, dotnum] "first", combodot "firs", anotherdot "fir", aanotherdot "fi"]
         if shape == "square":
             canapp = True
             for sd in squares:
