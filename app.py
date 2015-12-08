@@ -7,7 +7,7 @@ line6 = "byppbb" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
-def findsurrounding(row, index):
+def findsurrounding(row, index, color):
     finalret = []
     if row > 1:
         finalret.append([row - 1, index])
@@ -25,6 +25,7 @@ def findsurrounding(row, index):
         finalret.append([row, index + 1])
     else:
         finalret.append([])
+    
     return finalret
 
 potentialcombos = []
@@ -58,14 +59,16 @@ for row in grid:
                 if pos != []:
                     right = list(grid[pos[0]])[pos[1] - 1]
         if top == dot:
-            selfpotentialcombos.append([[dotrow, dotnum], [dotrow - 1, dotnum]])
+            selfpotentialcombos.append([dotrow - 1, dotnum])
         if right == dot:
-            selfpotentialcombos.append([[dotrow, dotnum], [dotrow, dotnum + 1]])
+            selfpotentialcombos.append([dotrow, dotnum + 1])
         if bottom == dot:
-            selfpotentialcombos.append([[dotrow, dotnum], [dotrow + 1, dotnum]])
+            selfpotentialcombos.append([dotrow + 1, dotnum])
         if left == dot:
-            selfpotentialcombos.append([[dotrow, dotnum], [dotrow, dotnum - 1]])
-        
+            selfpotentialcombos.append([dotrow, dotnum - 1])
+        finalsurrounding = []
+        for combodot in selfpotentialcombos:
+            nextsurrounding = findsurrounding(combodot[0], combodot[1])
 
 print(potentialcombos)
 
