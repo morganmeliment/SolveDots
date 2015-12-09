@@ -4,8 +4,8 @@ Sources: http://www.tutorialspoint.com/python/list_remove.htm
 line1 = "gyrrry" #input("First Line:")
 line2 = "rggyyg" #input("Second Line:")
 line3 = "rypyyg" #input("Third Line:")
-line4 = "rrpyyp" #input("Fourth line:")
-line5 = "ygryyy" #input("Fifth Line:")
+line4 = "rrpyyy" #input("Fourth line:")
+line5 = "ygrrrg" #input("Fifth Line:")
 line6 = "ppypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
@@ -58,7 +58,7 @@ def findsurrounding(row, index, color):
         selfpotentialcombos.append([row, index - 1])
     return selfpotentialcombos
 
-squares = []
+squares = []    
 
 dotnum = 0
 dotrow = 0
@@ -88,7 +88,7 @@ for row in grid:
                         nnnextsurrounding.remove(anotherdot)
                         if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
                             shape = "square"
-                            stringofdots = [[dotrow, dotnum] "first", combodot "firs", anotherdot "fir", aanotherdot "fi"]
+                            stringofdots = [str([dotrow, dotnum]) + "1", str(combodot) + "2", str(anotherdot) + "3", str(aanotherdot) + "4"]
         if shape == "square":
             canapp = True
             for sd in squares:
