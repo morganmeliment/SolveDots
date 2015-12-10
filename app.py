@@ -58,7 +58,9 @@ def findsurrounding(row, index, color):
         selfpotentialcombos.append([row, index - 1])
     return selfpotentialcombos
 
-squares = []    
+squares = []
+connectedshapes = []
+longlines = []
 
 dotnum = 0
 dotrow = 0
