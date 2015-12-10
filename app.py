@@ -4,7 +4,7 @@ Sources: http://www.tutorialspoint.com/python/list_remove.htm
 line1 = "gyrrry" #input("First Line:")
 line2 = "rggyyg" #input("Second Line:")
 line3 = "rypyyg" #input("Third Line:")
-line4 = "rrpyyy" #input("Fourth line:")
+line4 = "rrpyyb" #input("Fourth line:")
 line5 = "ygrrrg" #input("Fifth Line:")
 line6 = "ppypgg" #input("Sixth Line:")
 
@@ -81,26 +81,25 @@ for row in grid:
                 stringofdots = [[dotrow, dotnum], combodot, anotherdot]
                 nnextsurrounding = findsurrounding(anotherdot[0], anotherdot[1], dot)
                 nnextsurrounding.remove(combodot)
-                if len(nnextsurrounding) > 0:
+                if len(nnextsurrounding) >= 1:
                     shape = "quad"
                     for aanotherdot in nnextsurrounding:
                         nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
                         nnnextsurrounding.remove(anotherdot)
                         if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
                             shape = "square"
-                            stringofdots = [str([dotrow, dotnum]) + "1", str(combodot) + "2", str(anotherdot) + "3", str(aanotherdot) + "4"]
-        if shape == "square":
-            canapp = True
-            for sd in squares:
-                yount = 0
-                for sx in sd:
-                    for sa in stringofdots:
-                        if sx == sa:
-                            yount += 1
-                if yount == 4:
-                    canapp = False
-            if canapp == True:
-                squares.append(stringofdots)
+                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+                            canapp = True
+                            for sd in squares:
+                                yount = 0
+                                for sx in sd:
+                                    for sa in stringofdots:
+                                        if sx == sa:
+                                            yount += 1
+                                if yount == 4:
+                                    canapp = False
+                            if canapp == True:
+                                squares.append(stringofdots)
 print(squares)
 
 
