@@ -109,20 +109,20 @@ for row in grid:
                                 nnnnnnextsurrounding.remove(aaaanotherdot)
                                 if len(nnnnnnextsurrounding) >= 1:
                                     shape = "octa"
-        #if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
-                        #    shape = "square"
-                        #    stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
-                       #     canapp = True
-                        #    for sd in squares:
-                        #        yount = 0
-                         #       for sx in sd:
-                         #           for sa in stringofdots:
-                         #               if sx == sa:
-                         #                   yount += 1
-                         #       if yount == 4:
-                         #           canapp = False
-                         #   if canapp == True:
-                         #       squares.append(stringofdots)
+        if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
+            shape = "square"
+            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+            canapp = True
+            for sd in squares:
+                yount = 0
+                for sx in sd:
+                    for sa in stringofdots:
+                        if sx == sa:
+                            yount += 1
+            if yount == 4:
+                canapp = False
+            if canapp == True:
+                squares.append(stringofdots)
 
 print(squares)
 
