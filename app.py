@@ -85,23 +85,45 @@ for row in grid:
                 nnextsurrounding.remove(combodot)
                 if len(nnextsurrounding) >= 1:
                     shape = "quad"
-                    for aanotherdot in nnextsurrounding:
-                        nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
-                        nnnextsurrounding.remove(anotherdot)
-                        if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
-                            shape = "square"
-                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
-                            canapp = True
-                            for sd in squares:
-                                yount = 0
-                                for sx in sd:
-                                    for sa in stringofdots:
-                                        if sx == sa:
-                                            yount += 1
-                                if yount == 4:
-                                    canapp = False
-                            if canapp == True:
-                                squares.append(stringofdots)
+                for aanotherdot in nnextsurrounding:
+                    stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+                    nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
+                    nnnextsurrounding.remove(anotherdot)
+                    if len(nnnextsurrounding) >= 1:
+                        shape = "quint"
+                    for aaanotherdot in nnnextsurrounding:
+                        stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot]
+                        nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
+                        nnnnextsurrounding.remove(aanotherdot)
+                        if len(nnnnextsurrounding) >= 1:
+                            shape = "hecta"
+                        for aaaanotherdot in nnnnextsurrounding:
+                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
+                            nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
+                            nnnnnextsurrounding.remove(aaanotherdot)
+                            if len(nnnnnextsurrounding) >= 1:
+                                shape = "sept"
+                            for aaaaanotherdot in nnnnnextsurrounding:
+                                stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
+                                nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
+                                nnnnnnextsurrounding.remove(aaaanotherdot)
+                                if len(nnnnnnextsurrounding) >= 1:
+                                    shape = "octa"
+        #if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
+                        #    shape = "square"
+                        #    stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+                       #     canapp = True
+                        #    for sd in squares:
+                        #        yount = 0
+                         #       for sx in sd:
+                         #           for sa in stringofdots:
+                         #               if sx == sa:
+                         #                   yount += 1
+                         #       if yount == 4:
+                         #           canapp = False
+                         #   if canapp == True:
+                         #       squares.append(stringofdots)
+
 print(squares)
 
 
