@@ -58,9 +58,24 @@ def findsurrounding(row, index, color):
         selfpotentialcombos.append([row, index - 1])
     return selfpotentialcombos
 
-squares = []
-connectedshapes = []
-longlines = []
+def isasquare(points):
+    squareis = False
+    for poinqt in points:
+        newliste = points
+        newliste.remove(poinqt)
+        for otherpoint in newlist:
+            if otherpoint == poinqt:
+                squareis = True
+    return squareis
+                
+
+yellowsquares = []
+bluesquares = []
+greensquares = []
+purplesquares = []
+redsquares = []
+
+potentialmoves = []
 
 dotnum = 0
 dotrow = 0
@@ -71,6 +86,7 @@ for row in grid:
         surrounding = findsurrounding(dotrow, dotnum, dot)
         stringofdots = []
         shape = "single"
+        connecting = False
         if len(surrounding) > 0:
             shape = "double"
         for combodot in surrounding:
