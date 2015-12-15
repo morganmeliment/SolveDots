@@ -5,7 +5,7 @@ line1 = "gyrrry" #input("First Line:")
 line2 = "rggyyg" #input("Second Line:")
 line3 = "rypyyg" #input("Third Line:")
 line4 = "rrpyyb" #input("Fourth line:")
-line5 = "ygrrrg" #input("Fifth Line:")
+line5 = "pprrrg" #input("Fifth Line:")
 line6 = "ppypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
@@ -192,7 +192,18 @@ else:
     for rsq in redsquares:
         potentialmoves.append(["r", rsq, amntofreddots])
     
-
+highestpossibledotremoval = 0
+for move in potentialmoves:
+    movecolor = move[0]
+    moveposition = move[1]
+    moveresult = move[2]
+    if highestpossibledotremoval < moveresult:
+        highestpossibledotremoval = moveresult
+    
+        
+        
+    
+print(highestpossibledotremoval)
 print(potentialmoves)
 
 
