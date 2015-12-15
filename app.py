@@ -60,12 +60,13 @@ def findsurrounding(row, index, color):
 
 def isasquare(points):
     squareis = False
-    for poinqt in points:
-        newliste = points
-        newliste.remove(poinqt)
-        for otherpoint in newlist:
-            if otherpoint == poinqt:
-                squareis = True
+    if len(points) >= 4:
+        for poinqt in points:
+            newliste = points
+            newliste.remove(poinqt)
+            for otherpoint in newliste:
+                if otherpoint == poinqt:
+                    squareis = True
     return squareis
                 
 
@@ -125,23 +126,45 @@ for row in grid:
                                 nnnnnnextsurrounding.remove(aaaanotherdot)
                                 if len(nnnnnnextsurrounding) >= 1:
                                     shape = "octa"
-        if nnnextsurrounding.count([dotrow, dotnum]) >= 1:
-            shape = "square"
-            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+        if isasquare(stringofdots):
             canapp = True
-            for sd in squares:
+            if dot == "y":
+                colorarray = yellowsquares
+            if dot == "g":
+                colorarray = greensquares
+            if dot == "b":
+                colorarray = bluesquares
+            if dot == "r":
+                colorarray = redsquares
+            if dot == "p":
+                colorarray = purplesquares
+            for sd in colorarray:
                 yount = 0
                 for sx in sd:
                     for sa in stringofdots:
                         if sx == sa:
                             yount += 1
-            if yount == 4:
-                canapp = False
+                if yount == len(stringofdots):
+                    canapp = False
             if canapp == True:
-                squares.append(stringofdots)
+                colorarray.append(stringofdots)
+            if dot == "y":
+                yellowsquares = colorarray
+            if dot == "g":
+                greensquares = colorarray
+            if dot == "b":
+                bluesquares = colorarray
+            if dot == "r":
+                redsquares = colorarray
+            if dot == "p":
+                purplesquares = colorarray
+        
 
-print(squares)
-
+print(yellowsquares)
+print(greensquares)
+print(bluesquares)
+print(redsquares)
+print(purplesquares)
 
 
 
