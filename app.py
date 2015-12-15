@@ -157,6 +157,11 @@ for row in grid:
                             stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
                             checkup(stringofdots, dot)
 
+if len(yellowsquares) == 0 and len(greensquares) == 0 and len(bluesquares) == 0 and len(redsquares) == 0 and len(purplesquares) == 0:
+    nosquares = True
+else:
+    nosquares = False
+
 print(reccomendedmove)
 
 print(yellowsquares)
