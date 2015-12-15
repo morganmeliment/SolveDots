@@ -126,8 +126,10 @@ for row in grid:
                                 nnnnnnextsurrounding.remove(aaaanotherdot)
                                 if len(nnnnnnextsurrounding) >= 1:
                                     shape = "octa"
-        if isasquare(stringofdots):
-            canapp = True
+        sqis = isasquare(stringofdots)
+        if dot == "y":
+            print(stringofdots)
+            """canapp = True
             if dot == "y":
                 colorarray = yellowsquares
             if dot == "g":
@@ -157,7 +159,7 @@ for row in grid:
             if dot == "r":
                 redsquares = colorarray
             if dot == "p":
-                purplesquares = colorarray
+                purplesquares = colorarray"""
         
 
 print(yellowsquares)
