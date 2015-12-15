@@ -182,21 +182,18 @@ else:
     nosquares = False
     strategy = "make a square that removes the most dots and leaves a good board"
     for ysq in yellowsquares:
-        
-    
+        potentialmoves.append(["y", ysq, amntofyellowdots])
+    for gsq in greensquares:
+        potentialmoves.append(["g", gsq, amntofgreendots])
+    for bsq in bluesquares:
+        potentialmoves.append(["b", bsq, amntofbluedots])
+    for psq in purplesquares:
+        potentialmoves.append(["p", psq, amntofpurpledots])
+    for rsq in redsquares:
+        potentialmoves.append(["r", rsq, amntofreddots])
     
 
-print(amntofyellowdots)
-print(amntofgreendots)
-print(amntofbluedots)
-print(amntofpurpledots)
-print(amntofreddots)
-
-print(yellowsquares)
-print(greensquares)
-print(bluesquares)
-print(redsquares)
-print(purplesquares)
+print(potentialmoves)
 
 
 
