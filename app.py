@@ -10,11 +10,7 @@ line6 = "ppypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
-yellowsquares = []
-bluesquares = []
-greensquares = []
-purplesquares = []
-redsquares = []
+reccomendedmove = "undecided"
 
 def findsurrounding(row, index, color):
     finalret = []
@@ -76,40 +72,35 @@ def isasquare(points):
                 if otherpoint == poinqt:
                     squareis = True
     return squareis
-                
+
+yellowsquares = []
+bluesquares = []
+greensquares = []
+purplesquares = []
+redsquares = []
+
 def checkup(thedots, thecolor):
-    if isasquare(thedots):
-        canapp = True
-        if thecolor == "y":
-            colorarray = yellowsquares
-        if thecolor == "g":
-            colorarray = greensquares
-        if thecolor == "b":
-            colorarray = bluesquares
-        if thecolor == "r":
-            colorarray = redsquares
-        if thecolor == "p":
-            colorarray = purplesquares
-        for sd in colorarray:
-            yount = 0
-            for sx in sd:
-                for sa in thedots:
-                    if sx == sa:
-                        yount += 1
-            if yount == len(thedots):
-                canapp = False
-        if canapp == True:
-            colorarray.append(thedots)
-        if thecolor == "y":
-            yellowsquares = colorarray
-        if thecolor == "g":
-            greensquares = colorarray
-        if thecolor == "b":
-            bluesquares = colorarray
-        if thecolor == "r":
-            redsquares = colorarray
-        if thecolor == "p":
-            purplesquares = colorarray
+    canapp = True
+    if thecolor == "y":
+        colorarray = yellowsquares
+    if thecolor == "g":
+        colorarray = greensquares
+    if thecolor == "b":
+        colorarray = bluesquares
+    if thecolor == "r":
+        colorarray = redsquares
+    if thecolor == "p":
+        colorarray = purplesquares
+    for sd in colorarray:
+        yount = 0
+        for sx in sd:
+            for sa in thedots:
+                if sx == sa:
+                    yount += 1
+        if yount == len(thedots):
+            canapp = False
+    if canapp == True:
+        colorarray.append(thedots)
 
 potentialmoves = []
 
@@ -163,11 +154,10 @@ for row in grid:
                                     if len(nnnnnnextsurrounding) >= 1:
                                         shape = "octa"
                         else:
+                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
                             checkup(stringofdots, dot)
-                            print(stringofdots)
-        
-                
 
+print(reccomendedmove)
 
 print(yellowsquares)
 print(greensquares)
