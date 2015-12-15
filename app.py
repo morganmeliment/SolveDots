@@ -10,6 +10,12 @@ line6 = "ppypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
+yellowsquares = []
+bluesquares = []
+greensquares = []
+purplesquares = []
+redsquares = []
+
 def findsurrounding(row, index, color):
     finalret = []
     if row > 1:
@@ -62,19 +68,48 @@ def isasquare(points):
     squareis = False
     if len(points) >= 4:
         for poinqt in points:
-            newliste = points
+            newliste = []
+            for poind in points:
+                newliste.append(poind)
             newliste.remove(poinqt)
             for otherpoint in newliste:
                 if otherpoint == poinqt:
                     squareis = True
     return squareis
                 
-
-yellowsquares = []
-bluesquares = []
-greensquares = []
-purplesquares = []
-redsquares = []
+def checkup(thedots, thecolor):
+    if isasquare(thedots):
+        canapp = True
+        if thecolor == "y":
+            colorarray = yellowsquares
+        if thecolor == "g":
+            colorarray = greensquares
+        if thecolor == "b":
+            colorarray = bluesquares
+        if thecolor == "r":
+            colorarray = redsquares
+        if thecolor == "p":
+            colorarray = purplesquares
+        for sd in colorarray:
+            yount = 0
+            for sx in sd:
+                for sa in thedots:
+                    if sx == sa:
+                        yount += 1
+            if yount == len(thedots):
+                canapp = False
+        if canapp == True:
+            colorarray.append(thedots)
+        if thecolor == "y":
+            yellowsquares = colorarray
+        if thecolor == "g":
+            greensquares = colorarray
+        if thecolor == "b":
+            bluesquares = colorarray
+        if thecolor == "r":
+            redsquares = colorarray
+        if thecolor == "p":
+            purplesquares = colorarray
 
 potentialmoves = []
 
@@ -110,57 +145,29 @@ for row in grid:
                         shape = "quint"
                     for aaanotherdot in nnnextsurrounding:
                         stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot]
-                        nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
-                        nnnnextsurrounding.remove(aanotherdot)
-                        if len(nnnnextsurrounding) >= 1:
-                            shape = "hecta"
-                        for aaaanotherdot in nnnnextsurrounding:
-                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
-                            nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
-                            nnnnnextsurrounding.remove(aaanotherdot)
-                            if len(nnnnnextsurrounding) >= 1:
-                                shape = "sept"
-                            for aaaaanotherdot in nnnnnextsurrounding:
-                                stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
-                                nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
-                                nnnnnnextsurrounding.remove(aaaanotherdot)
-                                if len(nnnnnnextsurrounding) >= 1:
-                                    shape = "octa"
-        sqis = isasquare(stringofdots)
-        if dot == "y":
-            print(stringofdots)
-            """canapp = True
-            if dot == "y":
-                colorarray = yellowsquares
-            if dot == "g":
-                colorarray = greensquares
-            if dot == "b":
-                colorarray = bluesquares
-            if dot == "r":
-                colorarray = redsquares
-            if dot == "p":
-                colorarray = purplesquares
-            for sd in colorarray:
-                yount = 0
-                for sx in sd:
-                    for sa in stringofdots:
-                        if sx == sa:
-                            yount += 1
-                if yount == len(stringofdots):
-                    canapp = False
-            if canapp == True:
-                colorarray.append(stringofdots)
-            if dot == "y":
-                yellowsquares = colorarray
-            if dot == "g":
-                greensquares = colorarray
-            if dot == "b":
-                bluesquares = colorarray
-            if dot == "r":
-                redsquares = colorarray
-            if dot == "p":
-                purplesquares = colorarray"""
+                        if isasquare(stringofdots) == False:
+                            nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
+                            nnnnextsurrounding.remove(aanotherdot)
+                            if len(nnnnextsurrounding) >= 1:
+                                shape = "hecta"
+                            for aaaanotherdot in nnnnextsurrounding:
+                                stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
+                                nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
+                                nnnnnextsurrounding.remove(aaanotherdot)
+                                if len(nnnnnextsurrounding) >= 1:
+                                    shape = "sept"
+                                for aaaaanotherdot in nnnnnextsurrounding:
+                                    stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
+                                    nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
+                                    nnnnnnextsurrounding.remove(aaaanotherdot)
+                                    if len(nnnnnnextsurrounding) >= 1:
+                                        shape = "octa"
+                        else:
+                            checkup(stringofdots, dot)
+                            print(stringofdots)
         
+                
+
 
 print(yellowsquares)
 print(greensquares)
