@@ -102,8 +102,6 @@ def checkup(thedots, thecolor):
     if canapp == True:
         colorarray.append(thedots)
 
-potentialmoves = []
-
 dotnum = 0
 dotrow = 0
 for row in grid:
@@ -157,12 +155,42 @@ for row in grid:
                             stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
                             checkup(stringofdots, dot)
 
+amntofyellowdots = 0
+amntofgreendots = 0
+amntofreddots = 0
+amntofbluedots = 0
+amntofpurpledots = 0
+potentialmoves = []
+
+for linezq in grid:
+    for dot12 in list(grid[linezq]):
+        if dot12 == "y":
+            amntofyellowdots += 1
+        if dot12 == "g":
+            amntofgreendots += 1
+        if dot12 == "b":
+            amntofbluedots += 1
+        if dot12 == "r":
+            amntofreddots += 1
+        if dot12 == "p":
+            amntofpurpledots += 1
+
 if len(yellowsquares) == 0 and len(greensquares) == 0 and len(bluesquares) == 0 and len(redsquares) == 0 and len(purplesquares) == 0:
     nosquares = True
+    strategy = "set up board strategically"
 else:
     nosquares = False
+    strategy = "make a square that removes the most dots and leaves a good board"
+    for ysq in yellowsquares:
+        
+    
+    
 
-print(reccomendedmove)
+print(amntofyellowdots)
+print(amntofgreendots)
+print(amntofbluedots)
+print(amntofpurpledots)
+print(amntofreddots)
 
 print(yellowsquares)
 print(greensquares)
