@@ -3,10 +3,10 @@ Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
 line1 = "gyrrry" #input("First Line:")
 line2 = "rggyyg" #input("Second Line:")
-line3 = "rypyyg" #input("Third Line:")
+line3 = "rypryg" #input("Third Line:")
 line4 = "rrpyyb" #input("Fourth line:")
 line5 = "pprrrg" #input("Fifth Line:")
-line6 = "ppypgg" #input("Sixth Line:")
+line6 = "gpypgg" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
@@ -155,6 +155,31 @@ for row in grid:
                             stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
                             checkup(stringofdots, dot)
 
+def findalmostsquares():
+    yellow = []
+    green = []
+    blue = []
+    purple = []
+    red = []
+    for linez in grid:
+        xpos = 0
+        for dot1 in list(grid[linez]):
+            xpos += 1
+            if dot1 == "y":
+                yellow.append([linez, xpos])
+            if dot1 == "g":
+                green.append([linez, xpos])
+            if dot1 == "b":
+                blue.append([linez, xpos])
+            if dot1 == "r":
+                red.append([linez, xpos])
+            if dot1 == "p":
+                purple.append([linez, xpos])
+    for yellowp in yellow:
+        
+    return True
+    
+
 amntofyellowdots = 0
 amntofgreendots = 0
 amntofreddots = 0
@@ -178,6 +203,7 @@ for linezq in grid:
 if len(yellowsquares) == 0 and len(greensquares) == 0 and len(bluesquares) == 0 and len(redsquares) == 0 and len(purplesquares) == 0:
     nosquares = True
     strategy = "set up board strategically"
+    almostsquares = findalmostsquares()
 else:
     nosquares = False
     strategy = "make a square that removes the most dots and leaves a good board"
@@ -193,16 +219,15 @@ else:
         potentialmoves.append(["r", rsq, amntofreddots])
     
 highestpossibledotremoval = 0
+bestoutcomefortheround = []
 for move in potentialmoves:
     movecolor = move[0]
     moveposition = move[1]
     moveresult = move[2]
     if highestpossibledotremoval < moveresult:
         highestpossibledotremoval = moveresult
-    
-        
-        
-    
+        bestoutcomefortheround = move
+
 print(highestpossibledotremoval)
 print(potentialmoves)
 
