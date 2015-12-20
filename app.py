@@ -234,7 +234,9 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
 
 roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
 
-for possmove in roundonepossiblemoves[15:16]:
+gridline = [list(lineone), list(linetwo), list(linethree), list(linefour), list(linefive), list(linesix)]
+
+for possmove in roundonepossiblemoves[15:17]:
     pointstoremove = []
     if len(possmove[1]) > 4:
         if isasquare(possmove) == True:
@@ -270,22 +272,21 @@ for possmove in roundonepossiblemoves[15:16]:
                     pointstoremove.append([6, cvb])
     else:
         pointstoremove = possmove[1]
-        
+    
     for point in pointstoremove:
-        gridline = [list(lineone), list(linetwo), list(linethree), list(linefour), list(linefive), list(linesix)]
         pointsaboveremove = []
-        num = 1
-        while num < point[0]:
+        num = point[0]
+        while num > 0:
             pointsaboveremove.append([num, point[1]])
-            num += 1
+            num -= 1
         num = len(pointsaboveremove)
         for pointtwo in pointsaboveremove:
             num -= 1
             if num == 0:
-                gridline[pointtwo[0]][pointtwo[1] - 1] = " "
-        print(gridline)
+                gridline[0][pointtwo[1] - 1] = " "
+            else:
+                gridline[pointtwo[0] - 1][pointtwo[1] - 1] = gridline[pointtwo[0] - 2][pointtwo[1] - 1]
         
-
 print(roundonepossiblemoves)
 
 
