@@ -234,39 +234,38 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
 
 roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
 
-gridline = [list(lineone), list(linetwo), list(linethree), list(linefour), list(linefive), list(linesix)]
-
-for possmove in roundonepossiblemoves[15:17]:
+def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq):
+    gridline = [list(lineoneq), list(linetwoq), list(linethreeq), list(linefourq), list(linefiveq), list(linesixq)]
     pointstoremove = []
     if len(possmove[1]) > 4:
         if isasquare(possmove) == True:
             cvb = 0
-            for colodot in list(lineone):
+            for colodot in list(lineoneq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([1, cvb])
             cvb = 0
-            for colodot in list(linetwo):
+            for colodot in list(linetwoq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([2, cvb])
             cvb = 0
-            for colodot in list(linethree):
+            for colodot in list(linethreeq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([3, cvb])
             cvb = 0
-            for colodot in list(linefour):
+            for colodot in list(linefourq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([4, cvb])
             cvb = 0
-            for colodot in list(linefive):
+            for colodot in list(linefiveq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([5, cvb])
             cvb = 0
-            for colodot in list(linesix):
+            for colodot in list(linesixq):
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([6, cvb])
@@ -286,7 +285,17 @@ for possmove in roundonepossiblemoves[15:17]:
                 gridline[0][pointtwo[1] - 1] = " "
             else:
                 gridline[pointtwo[0] - 1][pointtwo[1] - 1] = gridline[pointtwo[0] - 2][pointtwo[1] - 1]
-        
+    return gridline
+    
+for move in roundonepossiblemoves:
+    potarry = removedots(lineone, linetwo, linethree, linefour, linefive, linesix)
+    newpotarrry = []
+    for line in potarry:
+        finstrin = ""
+        for letter in line:
+            finstrin = finstrin + letter
+        newpotarry.append(finstrin)
+    
 print(roundonepossiblemoves)
 
 
