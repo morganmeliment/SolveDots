@@ -226,7 +226,7 @@ def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq, p
     gridline = [list(lineoneq), list(linetwoq), list(linethreeq), list(linefourq), list(linefiveq), list(linesixq)]
     pointstoremove = []
     if len(possmove[1]) > 4:
-        if isasquare(possmove) == True:
+        if isasquare(possmove[1]) == True:
             cvb = 0
             for colodot in list(lineoneq):
                 cvb += 1
