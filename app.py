@@ -296,9 +296,9 @@ for move in roundonepossiblemoves:
         moveresult = movetwo[2] + move[2]
         if highestpossibledotremoval <= moveresult:
             highestpossibledotremoval = moveresult
-            #if eachround[1] < move[2]:
-                #bestoutcomefortheround = [move, movetwo]
-              #  eachround = [move[2], movetwo[2]]
+            if eachround[1] < move[2]:
+                bestoutcomefortheround = [move, movetwo]
+                eachround = [move[2], movetwo[2]]
     roundscores.append(bestoutcomefortheround)
 
 highestpossibledotremoval = 0
