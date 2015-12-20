@@ -1,12 +1,13 @@
 """
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
-line1 = "gyrrry" #input("First Line:")
-line2 = "rggyyg" #input("Second Line:")
-line3 = "rypryg" #input("Third Line:")
-line4 = "rrpyyb" #input("Fourth line:")
-line5 = "pprrrg" #input("Fifth Line:")
-line6 = "gpypgg" #input("Sixth Line:")
+
+line1 = "grpggg" #input("First Line:")
+line2 = "rbrpry" #input("Second Line:")
+line3 = "gppgyp" #input("Third Line:")
+line4 = "bpggpr" #input("Fourth line:")
+line5 = "bpbgry" #input("Fifth Line:")
+line6 = "pypyyb" #input("Sixth Line:")
 
 grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
@@ -102,6 +103,12 @@ def checkup(thedots, thecolor):
     if canapp == True:
         colorarray.append(thedots)
 
+anymove = []
+
+def istruemove(dotzx, colf):
+    if [dotzx, colf] not in anymove:
+        anymove.append([dotzx, colf])
+
 dotnum = 0
 dotrow = 0
 for row in grid:
@@ -109,7 +116,7 @@ for row in grid:
     for dot in list(grid[row]):
         dotnum = (dotnum % 6) + 1
         surrounding = findsurrounding(dotrow, dotnum, dot)
-        stringofdots = []
+        stringofdots = [[dotrow, dotnum]]
         shape = "single"
         connecting = False
         if len(surrounding) > 0:
@@ -134,58 +141,39 @@ for row in grid:
                         shape = "quint"
                     for aaanotherdot in nnnextsurrounding:
                         stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot]
-                        if isasquare(stringofdots) == False:
-                            nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
-                            nnnnextsurrounding.remove(aanotherdot)
-                            if len(nnnnextsurrounding) >= 1:
-                                shape = "hecta"
-                            for aaaanotherdot in nnnnextsurrounding:
-                                stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
-                                nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
-                                nnnnnextsurrounding.remove(aaanotherdot)
-                                if len(nnnnnextsurrounding) >= 1:
-                                    shape = "sept"
-                                for aaaaanotherdot in nnnnnextsurrounding:
-                                    stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
-                                    nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
-                                    nnnnnnextsurrounding.remove(aaaanotherdot)
-                                    if len(nnnnnnextsurrounding) >= 1:
-                                        shape = "octa"
-                        else:
-                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
-                            checkup(stringofdots, dot)
+                        nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
+                        nnnnextsurrounding.remove(aanotherdot)
+                        if len(nnnnextsurrounding) >= 1:
+                            shape = "hecta"
+                        for aaaanotherdot in nnnnextsurrounding:
+                            stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
+                            nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
+                            nnnnnextsurrounding.remove(aaanotherdot)
+                            if len(nnnnnextsurrounding) >= 1:
+                                shape = "sept"
+                            for aaaaanotherdot in nnnnnextsurrounding:
+                                stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
+                                nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
+                                nnnnnnextsurrounding.remove(aaaanotherdot)
+                                if len(nnnnnnextsurrounding) >= 1:
+                                    shape = "octa"
 
-def findalmostsquares():
-    yellow = []
-    green = []
-    blue = []
-    purple = []
-    red = []
-    for linez in grid:
-        xpos = 0
-        for dot1 in list(grid[linez]):
-            xpos += 1
-            if dot1 == "y":
-                yellow.append([linez, xpos])
-            if dot1 == "g":
-                green.append([linez, xpos])
-            if dot1 == "b":
-                blue.append([linez, xpos])
-            if dot1 == "r":
-                red.append([linez, xpos])
-            if dot1 == "p":
-                purple.append([linez, xpos])
-    for yellowp in yellow:
-        
-    return True
-    
+potentialmoves = []
+
+for randommove in anymove:
+    if len(randommove[0]) >= 5:
+        #if isasquare(randommove[0]) == True:
+       #     checkup(randommove[0], randommove[1])
+       # else:
+        potentialmoves.append([randommove[1], randommove[0], len(randommove[0])])
+    else:
+        potentialmoves.append([randommove[1], randommove[0], len(randommove[0])])
 
 amntofyellowdots = 0
 amntofgreendots = 0
 amntofreddots = 0
 amntofbluedots = 0
 amntofpurpledots = 0
-potentialmoves = []
 
 for linezq in grid:
     for dot12 in list(grid[linezq]):
@@ -200,23 +188,16 @@ for linezq in grid:
         if dot12 == "p":
             amntofpurpledots += 1
 
-if len(yellowsquares) == 0 and len(greensquares) == 0 and len(bluesquares) == 0 and len(redsquares) == 0 and len(purplesquares) == 0:
-    nosquares = True
-    strategy = "set up board strategically"
-    almostsquares = findalmostsquares()
-else:
-    nosquares = False
-    strategy = "make a square that removes the most dots and leaves a good board"
-    for ysq in yellowsquares:
-        potentialmoves.append(["y", ysq, amntofyellowdots])
-    for gsq in greensquares:
-        potentialmoves.append(["g", gsq, amntofgreendots])
-    for bsq in bluesquares:
-        potentialmoves.append(["b", bsq, amntofbluedots])
-    for psq in purplesquares:
-        potentialmoves.append(["p", psq, amntofpurpledots])
-    for rsq in redsquares:
-        potentialmoves.append(["r", rsq, amntofreddots])
+for ysq in yellowsquares:
+    potentialmoves.append(["y", ysq, amntofyellowdots])
+for gsq in greensquares:
+    potentialmoves.append(["g", gsq, amntofgreendots])
+for bsq in bluesquares:
+    potentialmoves.append(["b", bsq, amntofbluedots])
+for psq in purplesquares:
+    potentialmoves.append(["p", psq, amntofpurpledots])
+for rsq in redsquares:
+    potentialmoves.append(["r", rsq, amntofreddots])
     
 highestpossibledotremoval = 0
 bestoutcomefortheround = []
