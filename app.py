@@ -294,12 +294,12 @@ for move in roundonepossiblemoves:
     roundscores.append([move, movetwo])
 
 highestpossibledotremoval = 0
-    bestoutcomefortheround = []
-    for movetwo in roundtwopossiblemoves:
-        moveresult = movetwo[2]
-        if highestpossibledotremoval < moveresult:
-            highestpossibledotremoval = moveresult
-            bestoutcomefortheround = movetwo
+bestoutcomefortheround = []
+for moves in roundscores:
+    moveresult = moves[0][2] + moves[1][2]
+    if highestpossibledotremoval < moveresult:
+        highestpossibledotremoval = moveresult
+        bestoutcomefortheround = moves[0][1]
 print(roundonepossiblemoves)
 
 
