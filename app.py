@@ -288,12 +288,11 @@ for move in roundonepossiblemoves:
     highestpossibledotremoval = 0
     bestoutcomefortheround = []
     for movetwo in roundtwopossiblemoves:
-        moveresult = movetwo[2]
+        moveresult = movetwo[2] + move[2]
         if highestpossibledotremoval < moveresult:
             highestpossibledotremoval = moveresult
-            bestoutcomefortheround = movetwo
-    roundscores.append([move, bestoutcomefortheround])
-
+            bestoutcomefortheround = [move, movetwo]
+    roundscores.append(bestoutcomefortheround)
 
 highestpossibledotremoval = 0
 bestoutcomefortheround = []
@@ -301,10 +300,10 @@ for moves in roundscores:
     moveresult = moves[0][2] + moves[1][2]
     if highestpossibledotremoval < moveresult:
         highestpossibledotremoval = moveresult
-        bestoutcomefortheround = [moves[0][1], moves[1][1]]
+        bestoutcomefortheround = [moves[0], moves[1]]
 print(highestpossibledotremoval)
 print(bestoutcomefortheround)
-#print(removedots(lineone, linetwo, linethree, linefour, linefive, linesix, bestoutcomefortheround))
+#print(removedots(lineone, linetwo, linethree, linefour, linefive, linesix, bestoutcomefortheround[1]))
 
 
 
