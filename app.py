@@ -2,14 +2,14 @@
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
 
-lineone = "ggqggg"
-linetwo = "ggrpry"
+lineone = "grpggg"
+linetwo = "rbrpry"
 linethree = "gppgyp"
 linefour = "bpggpr"
 linefive = "bpbgry"
 linesix = "pypyyb"
 
-lineonecopy = "grqggg"
+lineonecopy = "grpggg"
 linetwocopy = "rbrpry"
 linethreecopy = "gppgyp"
 linefourcopy = "bpggpr"
@@ -234,8 +234,8 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
 
 roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
 
-pointstoremove = []
-for possmove in roundonepossiblemoves[0:1]:
+for possmove in roundonepossiblemoves[15:16]:
+    pointstoremove = []
     if len(possmove[1]) > 4:
         if isasquare(possmove) == True:
             cvb = 0
@@ -270,6 +270,21 @@ for possmove in roundonepossiblemoves[0:1]:
                     pointstoremove.append([6, cvb])
     else:
         pointstoremove = possmove[1]
+        
+    for point in pointstoremove:
+        gridline = [list(lineone), list(linetwo), list(linethree), list(linefour), list(linefive), list(linesix)]
+        pointsaboveremove = []
+        num = 1
+        while num < point[0]:
+            pointsaboveremove.append([num, point[1]])
+            num += 1
+        num = len(pointsaboveremove)
+        for pointtwo in pointsaboveremove:
+            num -= 1
+            if num == 0:
+                gridline[pointtwo[0]][pointtwo[1] - 1] = " "
+        print(gridline)
+        
 
 print(roundonepossiblemoves)
 
