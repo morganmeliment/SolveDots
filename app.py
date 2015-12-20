@@ -106,7 +106,15 @@ def checkup(thedots, thecolor):
 anymove = []
 
 def istruemove(dotzx, colf):
-    if [dotzx, colf] not in anymove:
+    shud = True
+    for valdot in anymove:
+        couont = 0
+        for aval in dotzx:
+            if aval in valdot[0]:
+                couont += 1
+        if couont == len(valdot[0]) and len(valdot[0]) == len(dotzx):
+            shud = False
+    if shud == True:
         anymove.append([dotzx, colf])
 
 dotnum = 0
@@ -117,36 +125,42 @@ for row in grid:
         dotnum = (dotnum % 6) + 1
         surrounding = findsurrounding(dotrow, dotnum, dot)
         stringofdots = [[dotrow, dotnum]]
+        istruemove(stringofdots, dot)
         shape = "single"
         connecting = False
         if len(surrounding) > 0:
             shape = "double"
         for combodot in surrounding:
             stringofdots = [[dotrow, dotnum], combodot]
+            istruemove(stringofdots, dot)
             nextsurrounding = findsurrounding(combodot[0], combodot[1], dot)
             nextsurrounding.remove([dotrow, dotnum])
             if len(nextsurrounding) > 0:
                     shape = "triple"
             for anotherdot in nextsurrounding:
                 stringofdots = [[dotrow, dotnum], combodot, anotherdot]
+                istruemove(stringofdots, dot)
                 nnextsurrounding = findsurrounding(anotherdot[0], anotherdot[1], dot)
                 nnextsurrounding.remove(combodot)
                 if len(nnextsurrounding) >= 1:
                     shape = "quad"
                 for aanotherdot in nnextsurrounding:
                     stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
+                    istruemove(stringofdots, dot)
                     nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
                     nnnextsurrounding.remove(anotherdot)
                     if len(nnnextsurrounding) >= 1:
                         shape = "quint"
                     for aaanotherdot in nnnextsurrounding:
                         stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot]
+                        istruemove(stringofdots, dot)
                         nnnnextsurrounding = findsurrounding(aaanotherdot[0], aaanotherdot[1], dot)
                         nnnnextsurrounding.remove(aanotherdot)
                         if len(nnnnextsurrounding) >= 1:
                             shape = "hecta"
                         for aaaanotherdot in nnnnextsurrounding:
                             stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot]
+                            istruemove(stringofdots, dot)
                             nnnnnextsurrounding = findsurrounding(aaaanotherdot[0], aaaanotherdot[1], dot)
                             nnnnnextsurrounding.remove(aaanotherdot)
                             if len(nnnnnextsurrounding) >= 1:
@@ -162,10 +176,10 @@ potentialmoves = []
 
 for randommove in anymove:
     if len(randommove[0]) >= 5:
-        #if isasquare(randommove[0]) == True:
-       #     checkup(randommove[0], randommove[1])
-       # else:
-        potentialmoves.append([randommove[1], randommove[0], len(randommove[0])])
+        if isasquare(randommove[0]) == True:
+            checkup(randommove[0], randommove[1])
+        else:
+            potentialmoves.append([randommove[1], randommove[0], len(randommove[0])])
     else:
         potentialmoves.append([randommove[1], randommove[0], len(randommove[0])])
 
@@ -210,7 +224,8 @@ for move in potentialmoves:
         bestoutcomefortheround = move
 
 print(highestpossibledotremoval)
-print(potentialmoves)
+print(bestoutcomefortheround)
+print(len(potentialmoves))
 
 
 
