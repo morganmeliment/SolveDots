@@ -2,19 +2,14 @@
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
 
+roundscores = []
+
 lineone = "grpggg"
 linetwo = "rbrpry"
 linethree = "gppgyp"
 linefour = "bpggpr"
 linefive = "bpbgry"
 linesix = "pypyyb"
-
-lineonecopy = "grpggg"
-linetwocopy = "rbrpry"
-linethreecopy = "gppgyp"
-linefourcopy = "bpggpr"
-linefivecopy = "bpbgry"
-linesixcopy = "pypyyb"
 
 def isasquare(points):
     squareis = False
@@ -29,7 +24,7 @@ def isasquare(points):
                     squareis = True
     return squareis
 
-def findmovesonboard(line1, line2, line3, line4, line5, line6):
+def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
     grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
     reccomendedmove = "undecided"
@@ -133,7 +128,8 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
             dotnum = (dotnum % 6) + 1
             surrounding = findsurrounding(dotrow, dotnum, dot)
             stringofdots = [[dotrow, dotnum]]
-            istruemove(stringofdots, dot)
+            if findindiv == True:
+                istruemove(stringofdots, dot)
             shape = "single"
             connecting = False
             if len(surrounding) > 0:
@@ -232,9 +228,9 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
             bestoutcomefortheround = move
     return(potentialmoves)
 
-roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
+roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix, True)
 
-def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq):
+def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq, possmove):
     gridline = [list(lineoneq), list(linetwoq), list(linethreeq), list(linefourq), list(linefiveq), list(linesixq)]
     pointstoremove = []
     if len(possmove[1]) > 4:
@@ -288,13 +284,16 @@ def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq):
     return gridline
     
 for move in roundonepossiblemoves:
-    potarry = removedots(lineone, linetwo, linethree, linefour, linefive, linesix)
-    newpotarrry = []
+    roundonescore = move[2]
+    potarry = removedots(lineone, linetwo, linethree, linefour, linefive, linesix, move)
+    newpotarry = []
     for line in potarry:
         finstrin = ""
         for letter in line:
             finstrin = finstrin + letter
         newpotarry.append(finstrin)
+    roundtwopossiblemoves = findmovesonboard(newpotarry[0], newpotarry[1], newpotarry[2], newpotarry[3], newpotarry[4], newpotarry[5], False)
+    
     
 print(roundonepossiblemoves)
 
