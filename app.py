@@ -217,15 +217,6 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
     for rsq in redsquares:
         potentialmoves.append(["r", rsq, amntofreddots])
     
-    highestpossibledotremoval = 0
-    bestoutcomefortheround = []
-    for move in potentialmoves:
-        movecolor = move[0]
-        moveposition = move[1]
-        moveresult = move[2]
-        if highestpossibledotremoval < moveresult:
-            highestpossibledotremoval = moveresult
-            bestoutcomefortheround = move
     return(potentialmoves)
 
 roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix, True)
@@ -293,8 +284,22 @@ for move in roundonepossiblemoves:
             finstrin = finstrin + letter
         newpotarry.append(finstrin)
     roundtwopossiblemoves = findmovesonboard(newpotarry[0], newpotarry[1], newpotarry[2], newpotarry[3], newpotarry[4], newpotarry[5], False)
-    
-    
+    highestpossibledotremoval = 0
+    bestoutcomefortheround = []
+    for movetwo in roundtwopossiblemoves:
+        moveresult = movetwo[2]
+        if highestpossibledotremoval < moveresult:
+            highestpossibledotremoval = moveresult
+            bestoutcomefortheround = movetwo
+    roundscores.append([move, movetwo])
+
+highestpossibledotremoval = 0
+    bestoutcomefortheround = []
+    for movetwo in roundtwopossiblemoves:
+        moveresult = movetwo[2]
+        if highestpossibledotremoval < moveresult:
+            highestpossibledotremoval = moveresult
+            bestoutcomefortheround = movetwo
 print(roundonepossiblemoves)
 
 
