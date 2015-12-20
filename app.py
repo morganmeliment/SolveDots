@@ -4,12 +4,12 @@ Sources: http://www.tutorialspoint.com/python/list_remove.htm
 
 roundscores = []
 
-lineone = "grpggg"
-linetwo = "rbrpry"
-linethree = "gppgyp"
-linefour = "bpggpr"
-linefive = "bpbgry"
-linesix = "pypyyb"
+lineone = "bggppp"
+linetwo = "bgyrry"
+linethree = "pyprbb"
+linefour = "rpprbb"
+linefive = "rybybr"
+linesix = "rgbrgp"
 
 def isasquare(points):
     squareis = False
@@ -171,6 +171,7 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
                                     shape = "sept"
                                 for aaaaanotherdot in nnnnnextsurrounding:
                                     stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot, aaanotherdot, aaaanotherdot, aaaaanotherdot]
+                                    istruemove(stringofdots, dot)
                                     nnnnnnextsurrounding = findsurrounding(aaaaanotherdot[0], aaaaanotherdot[1], dot)
                                     nnnnnnextsurrounding.remove(aaaanotherdot)
                                     if len(nnnnnnextsurrounding) >= 1:
