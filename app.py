@@ -299,9 +299,9 @@ for moves in roundscores:
     moveresult = moves[0][2] + moves[1][2]
     if highestpossibledotremoval < moveresult:
         highestpossibledotremoval = moveresult
-        bestoutcomefortheround = moves[0][1]
-print(roundonepossiblemoves)
-
+        bestoutcomefortheround = [moves[0][1], moves[1][1]]
+print(highestpossibledotremoval)
+print(bestoutcomefortheround)
 
 
 
