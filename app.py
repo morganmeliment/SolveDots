@@ -2,14 +2,32 @@
 Sources: http://www.tutorialspoint.com/python/list_remove.htm
 """
 
-lineone = "grqggg" #input("First Line:")
-linetwo = "rbrpry" #input("Second Line:")
-linethree = "gppgyp" #input("Third Line:")
-linefour = "bpggpr" #input("Fourth line:")
-linefive = "bpbgry" #input("Fifth Line:")
-linesix = "pypyyb" #input("Sixth Line:")
+lineone = "ggqggg"
+linetwo = "ggrpry"
+linethree = "gppgyp"
+linefour = "bpggpr"
+linefive = "bpbgry"
+linesix = "pypyyb"
 
-roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
+lineonecopy = "grqggg"
+linetwocopy = "rbrpry"
+linethreecopy = "gppgyp"
+linefourcopy = "bpggpr"
+linefivecopy = "bpbgry"
+linesixcopy = "pypyyb"
+
+def isasquare(points):
+    squareis = False
+    if len(points) >= 4:
+        for poinqt in points:
+            newliste = []
+            for poind in points:
+                newliste.append(poind)
+            newliste.remove(poinqt)
+            for otherpoint in newliste:
+                if otherpoint == poinqt:
+                    squareis = True
+    return squareis
 
 def findmovesonboard(line1, line2, line3, line4, line5, line6):
     grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
@@ -63,19 +81,6 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
         if left == color:
             selfpotentialcombos.append([row, index - 1])
         return selfpotentialcombos
-
-    def isasquare(points):
-        squareis = False
-        if len(points) >= 4:
-            for poinqt in points:
-                newliste = []
-                for poind in points:
-                    newliste.append(poind)
-                newliste.remove(poinqt)
-                for otherpoint in newliste:
-                    if otherpoint == poinqt:
-                        squareis = True
-        return squareis
     
     yellowsquares = []
     bluesquares = []
@@ -226,6 +231,45 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6):
             highestpossibledotremoval = moveresult
             bestoutcomefortheround = move
     return(potentialmoves)
+
+roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix)
+
+pointstoremove = []
+for possmove in roundonepossiblemoves[0:1]:
+    if len(possmove[1]) > 4:
+        if isasquare(possmove) == True:
+            cvb = 0
+            for colodot in list(lineone):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([1, cvb])
+            cvb = 0
+            for colodot in list(linetwo):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([2, cvb])
+            cvb = 0
+            for colodot in list(linethree):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([3, cvb])
+            cvb = 0
+            for colodot in list(linefour):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([4, cvb])
+            cvb = 0
+            for colodot in list(linefive):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([5, cvb])
+            cvb = 0
+            for colodot in list(linesix):
+                cvb += 1
+                if colodot == possmove[0]:
+                    pointstoremove.append([6, cvb])
+    else:
+        pointstoremove = possmove[1]
 
 print(roundonepossiblemoves)
 
