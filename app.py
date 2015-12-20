@@ -124,7 +124,7 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
     for row in grid:
         dotrow += 1
         for dot in list(grid[row]):
-            if True:
+            if dot != ' ':
                 dotnum = (dotnum % 6) + 1
                 surrounding = findsurrounding(dotrow, dotnum, dot)
                 stringofdots = [[dotrow, dotnum]]
@@ -176,6 +176,8 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
                                         nnnnnnextsurrounding.remove(aaaanotherdot)
                                         if len(nnnnnnextsurrounding) >= 1:
                                             shape = "octa"
+            else:
+                dotnum = (dotnum % 6) + 1
 
     potentialmoves = []
     
@@ -257,6 +259,8 @@ def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq, p
                 cvb += 1
                 if colodot == possmove[0]:
                     pointstoremove.append([6, cvb])
+        else:
+            pointstoremove = possmove[1]
     else:
         pointstoremove = possmove[1]
     
@@ -274,7 +278,7 @@ def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq, p
             else:
                 gridline[pointtwo[0] - 1][pointtwo[1] - 1] = gridline[pointtwo[0] - 2][pointtwo[1] - 1]
     return gridline
-    
+
 for move in roundonepossiblemoves:
     roundonescore = move[2]
     potarry = removedots(lineone, linetwo, linethree, linefour, linefive, linesix, move)
@@ -287,11 +291,14 @@ for move in roundonepossiblemoves:
     roundtwopossiblemoves = findmovesonboard(newpotarry[0], newpotarry[1], newpotarry[2], newpotarry[3], newpotarry[4], newpotarry[5], False)
     highestpossibledotremoval = 0
     bestoutcomefortheround = []
+    eachround = [0, 0]
     for movetwo in roundtwopossiblemoves:
         moveresult = movetwo[2] + move[2]
-        if highestpossibledotremoval < moveresult:
+        if highestpossibledotremoval <= moveresult:
             highestpossibledotremoval = moveresult
-            bestoutcomefortheround = [move, movetwo]
+            #if eachround[1] < move[2]:
+                #bestoutcomefortheround = [move, movetwo]
+              #  eachround = [move[2], movetwo[2]]
     roundscores.append(bestoutcomefortheround)
 
 highestpossibledotremoval = 0
@@ -303,7 +310,6 @@ for moves in roundscores:
         bestoutcomefortheround = [moves[0], moves[1]]
 print(highestpossibledotremoval)
 print(bestoutcomefortheround)
-#print(removedots(lineone, linetwo, linethree, linefour, linefive, linesix, bestoutcomefortheround[1]))
 
 
 
