@@ -18,7 +18,7 @@ def isasquare(points):
             squareis = True
     return squareis
 
-def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
+def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv, strat):
     grid = {1: line1, 2: line2, 3: line3, 4: line4, 5: line5, 6: line6}
 
     reccomendedmove = "undecided"
@@ -136,21 +136,24 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
                     shape = "double"
                 for combodot in surrounding:
                     stringofdots = [[dotrow, dotnum], combodot]
-                    istruemove(stringofdots, dot)
+                    if strat == True:
+                        istruemove(stringofdots, dot)
                     nextsurrounding = findsurrounding(combodot[0], combodot[1], dot)
                     nextsurrounding.remove([dotrow, dotnum])
                     if len(nextsurrounding) > 0:
                         shape = "triple"
                     for anotherdot in nextsurrounding:
                         stringofdots = [[dotrow, dotnum], combodot, anotherdot]
-                        istruemove(stringofdots, dot)
+                        if strat == True:
+                            istruemove(stringofdots, dot)
                         nnextsurrounding = findsurrounding(anotherdot[0], anotherdot[1], dot)
                         nnextsurrounding.remove(combodot)
                         if len(nnextsurrounding) >= 1:
                             shape = "quad"
                         for aanotherdot in nnextsurrounding:
                             stringofdots = [[dotrow, dotnum], combodot, anotherdot, aanotherdot]
-                            istruemove(stringofdots, dot)
+                            if strat == True:
+                                istruemove(stringofdots, dot)
                             nnnextsurrounding = findsurrounding(aanotherdot[0], aanotherdot[1], dot)
                             nnnextsurrounding.remove(anotherdot)
                             if len(nnnextsurrounding) >= 1:
@@ -222,7 +225,7 @@ def findmovesonboard(line1, line2, line3, line4, line5, line6, findindiv):
     
     return(potentialmoves)
 
-roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix, True)
+roundonepossiblemoves = findmovesonboard(lineone, linetwo, linethree, linefour, linefive, linesix, True, True)
 
 def removedots(lineoneq, linetwoq, linethreeq, linefourq, linefiveq, linesixq, possmove):
     gridline = [list(lineoneq), list(linetwoq), list(linethreeq), list(linefourq), list(linefiveq), list(linesixq)]
@@ -288,18 +291,24 @@ for move in roundonepossiblemoves:
         for letter in line:
             finstrin = finstrin + letter
         newpotarry.append(finstrin)
-    roundtwopossiblemoves = findmovesonboard(newpotarry[0], newpotarry[1], newpotarry[2], newpotarry[3], newpotarry[4], newpotarry[5], False)
-    highestpossibledotremoval = 0
-    bestoutcomefortheround = []
-    eachround = [0, 0]
-    for movetwo in roundtwopossiblemoves:
-        moveresult = movetwo[2] + move[2]
-        if highestpossibledotremoval <= moveresult:
-            highestpossibledotremoval = moveresult
-            if eachround[1] < move[2]:
-                bestoutcomefortheround = [move, movetwo]
-                eachround = [move[2], movetwo[2]]
-    roundscores.append(bestoutcomefortheround)
+    strategy = True
+    if move[2] < 6:
+        strategy = False
+    roundtwopossiblemoves = findmovesonboard(newpotarry[0], newpotarry[1], newpotarry[2], newpotarry[3], newpotarry[4], newpotarry[5], False, strategy)
+    if roundtwopossiblemoves == []:
+        c = 0
+    else:
+        highestpossibledotremoval = 0
+        bestoutcomefortheround = []
+        eachround = [0, 0]
+        for movetwo in roundtwopossiblemoves:
+            moveresult = movetwo[2] + move[2]
+            if highestpossibledotremoval <= moveresult:
+                highestpossibledotremoval = moveresult
+                if eachround[1] < move[2]:
+                    bestoutcomefortheround = [move, movetwo]
+                    eachround = [move[2], movetwo[2]]
+        roundscores.append(bestoutcomefortheround)
 
 highestpossibledotremoval = 0
 bestoutcomefortheround = []
